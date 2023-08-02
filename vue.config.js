@@ -1,4 +1,5 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true
-})
+module.exports = {
+  devServer: {
+    https: true // 開發模式下使用HTTPS
+  }
+};
