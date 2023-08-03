@@ -1,0 +1,38 @@
+name: 更新專案並部署Vue.js
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  Cancel_Previous_Workflows:
+    runs-on: ubuntu-latest
+    permissions:
+          actions: write
+          
+    steps:
+      - name: 取消過去的Workflows
+        uses: styfle/cancel-workflow-action@0.11.0
+        with:
+          access_token: ${{ github.token }}
+          
+  Deploy_Vuejs:
+    needs: Cancel_Previous_Workflows
+    runs-on: self-hosted
+
+    steps:
+      - name: 檢查程式碼
+        uses: actions/checkout@v3
+
+      - name: 更新專案
+        run: |
+          git pull
+
+      - name: 安裝
+        run: |
+          npm install
+    
+      - name: 啟動Vue.js服務
+        run: |
+          npm run serve
