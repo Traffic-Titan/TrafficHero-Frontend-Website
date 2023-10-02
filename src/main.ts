@@ -1,8 +1,9 @@
 // FILE: main.js
 
 import { createApp } from 'vue'
-import { Quasar } from 'quasar'
+import { Quasar, QBtn,QToolbar } from 'quasar'; 
 import quasarLang from 'quasar/lang/zh-TW'
+
 
 // Import icon libraries
 import '@quasar/extras/roboto-font/roboto-font.css'
@@ -28,6 +29,7 @@ import 'quasar/src/css/index.sass'
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
 import App from './App.vue'
+import router from './router'
 
 const myApp = createApp(App)
 
@@ -46,7 +48,11 @@ myApp.use(Quasar, {
     // ..and many more (check Installation card on each Quasar component/directive/plugin)
   }
   */
-})
+},)
+myApp.use(router);
+
+
+myApp.component('q-btn', QBtn);
 
 // Assumes you have a <div id="app"></div> in your index.html
 myApp.mount('#app')
