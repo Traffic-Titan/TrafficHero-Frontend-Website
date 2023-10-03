@@ -1,7 +1,7 @@
 // FILE: main.js
 
 import { createApp } from 'vue'
-import { Quasar, QBtn,QToolbar } from 'quasar'; 
+import { Quasar, QBtn,QToolbar,QLayout,QHeader,QFooter,QDrawer,QPage,QPageContainer,QScrollArea, QPageSticky, QPageScroller, QInput, QBtnDropdown, QList, QItemLabel, QIntersection, QSeparator  } from 'quasar'; 
 import quasarLang from 'quasar/lang/zh-TW'
 
 
@@ -30,6 +30,8 @@ import 'quasar/src/css/index.sass'
 // and placed in same folder as main.js
 import App from './App.vue'
 import router from './router'
+import 'bootstrap/dist/css/bootstrap.css';
+import VueCookies from 'vue-cookies'
 
 const myApp = createApp(App)
 
@@ -50,9 +52,26 @@ myApp.use(Quasar, {
   */
 },)
 myApp.use(router);
-
+myApp.use(VueCookies)
 
 myApp.component('q-btn', QBtn);
+myApp.component('q-toolbar', QToolbar);
+myApp.component('q-layout', QLayout);
+myApp.component('q-page', QPage);
+myApp.component('q-page-container', QPageContainer);
+myApp.component('q-drawer', QDrawer);
+myApp.component('q-footer', QFooter);
+myApp.component('q-header', QHeader);
+myApp.component('q-scroll-area', QScrollArea);
+myApp.component('q-page-sticky', QPageSticky);
+myApp.component('q-page-scroller', QPageScroller);
+myApp.component('q-input', QInput);
+myApp.component('q-btn-dropdown', QBtnDropdown);
+myApp.component('q-list', QList);
+myApp.component('q-item-label', QItemLabel);
+myApp.component('q-item-section', QIntersection);
+myApp.component('q-separator', QSeparator);
+
 
 // Assumes you have a <div id="app"></div> in your index.html
 myApp.mount('#app')
