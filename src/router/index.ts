@@ -1,11 +1,16 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import HomeView from '../home.vue';
+import home from '../shared_interface/home.vue';
+import login from '../shared_interface/login.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: HomeView }
+    component: home },
+    {
+      path: '/login',
+      name: 'login',
+      component: login }
   
 ];
 

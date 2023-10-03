@@ -11,8 +11,11 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.16.7",
+    "axios": "^1.5.1",
+    "bootstrap": "^5.3.2",
     "quasar": "^2.12.7",
     "vue": "^3.3.4",
+    "vue-cookies": "^1.8.3",
     "vue-router": "^4.2.4"
   },
   "devDependencies": {
