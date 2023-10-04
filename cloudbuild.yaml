@@ -10,8 +10,9 @@ steps:
     - '-t'
     - 'gcr.io/${PROJECT_ID}/traffic-hero-frontend-website'
     - '--build-arg'
-    - 'VITE_API=$(_VITE_API)'
+    - 'VITE_API=$_VITE_API'
     - '--build-arg'
-    - 'VITE_websiteToken=$(_VITE_websiteToken)'
+    - 'VITE_websiteToken=$_VITE_websiteToken'
     - '--no-cache'
     - '.'
+
