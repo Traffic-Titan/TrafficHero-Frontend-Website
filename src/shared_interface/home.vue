@@ -43,7 +43,6 @@ export default {
         </q-header>
         <q-footer>
         </q-footer>
-
         <q-drawer v-model="drawerLeft" :width="200" :breakpoint="700" bordered>
           <q-scroll-area class="fit">
             <div class="q-pa-sm">
@@ -51,13 +50,7 @@ export default {
             </div>
           </q-scroll-area>
         </q-drawer>
-
-
-
         <q-page-container>
-
-
-
           <q-page-scroller position="bottom">
             <q-btn fab icon="keyboard_arrow_up" color="red" />
           </q-page-scroller>
