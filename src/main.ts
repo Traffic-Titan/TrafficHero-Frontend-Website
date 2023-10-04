@@ -22,7 +22,6 @@ import '@quasar/extras/eva-icons/eva-icons.css'
 import '@quasar/extras/themify/themify.css'
 import '@quasar/extras/line-awesome/line-awesome.css'
 import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
-
 // Import Quasar css
 import 'quasar/src/css/index.sass'
 
@@ -53,6 +52,7 @@ myApp.use(Quasar, {
 },)
 myApp.use(router);
 myApp.use(VueCookies)
+
 
 myApp.component('q-btn', QBtn);
 myApp.component('q-toolbar', QToolbar);

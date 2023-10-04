@@ -21,7 +21,7 @@
   "devDependencies": {
     "@quasar/vite-plugin": "^1.5.0",
     "@tsconfig/node18": "^18.2.2",
-    "@types/node": "^18.17.17",
+    "@types/node": "^18.18.3",
     "@vitejs/plugin-vue": "^4.3.4",
     "@vue/tsconfig": "^0.4.0",
     "npm-run-all2": "^6.0.6",

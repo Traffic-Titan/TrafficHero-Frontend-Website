@@ -15,5 +15,12 @@ export default defineConfig({
       autoImportComponentCase: 'pascal',
       sassVariables: 'src/quasar-variables.sass'
     })
-  ]
+  ],
+  build: {
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true // 启用inline选项
+      }
+    }
+  }
 })
