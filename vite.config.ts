@@ -18,12 +18,12 @@ export default defineConfig({
       autoImportComponentCase: 'pascal',
       sassVariables: 'src/quasar-variables.sass'
     }),
-    envCompatible(envVars) // 将环境变量对象传递给插件
+    envCompatible(envVars)
   ],
   build: {
     rollupOptions: {
       output: {
-        inlineDynamicImports: true // 启用inline选项
+        inlineDynamicImports: true
       }
     }
   }
