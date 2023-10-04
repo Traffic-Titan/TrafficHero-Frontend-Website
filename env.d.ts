@@ -2,7 +2,7 @@
 interface ImportMetaEnv {
     readonly VITE_API: string
     readonly VITE_login: string
-    readonly VITE_appToken: string
+    readonly VITE_websiteToken: string
   
   }
   
