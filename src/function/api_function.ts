@@ -1,6 +1,6 @@
 import axios from "axios";
 const api = import.meta.env.VITE_API
-const apptoken = import.meta.env.VITE_appToken
+const apptoken = import.meta.env.VITE_websiteToken
 export const apipost = async (email: any,password: any,url:string,jwt:string) => {
     
     const body = {
@@ -8,13 +8,12 @@ export const apipost = async (email: any,password: any,url:string,jwt:string) =>
         password : password
     }
 
-    const Response = await axios.post(api + url +JSON.stringify(body),{
+    const Response = await axios.post(api + url, JSON.stringify(body), {
         headers: {
-            "Authorization": 'Bearer ' + apptoken + jwt,
-            'Content-Type': 'application/json',
-            
-          }
-    })
+          'Content-Type': 'application/json',
+          "Authorization": 'Bearer ' + apptoken + jwt,
+        }
+      })
 
     return Response
 
