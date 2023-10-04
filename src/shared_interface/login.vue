@@ -27,12 +27,13 @@ import { ref, onMounted } from 'vue'
 import { RouterLink } from 'vue-router'
 import { apipost } from '../function/api_function'
 import VueCookies from "vue-cookies";
+import {url_login} from '../url_manager'
 export default {
   setup() {
     const email = ref('')
     const password = ref('')
     const res = ref()
-    const loginurl = import.meta.env.VITE_login
+    const loginurl = url_login
 
     const onMounted = () => {
 
