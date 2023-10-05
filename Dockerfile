@@ -2,8 +2,8 @@ FROM node:latest as build
 ARG VITE_websiteToken
 ARG VITE_API
 
-ENV VITE_websiteToken =$(VITE_websiteToken)
-ENV VITE_API =$(VITE_API)
+ENV VITE_websiteToken $VITE_websiteToken
+ENV VITE_API $VITE_API
 WORKDIR /app
 COPY package*.json /app/
 RUN npm install
