@@ -26,7 +26,7 @@ export default {
 <template>
   <div class="">
     <div class="q-pa-md test ">
-      <q-layout view="lhh LpR lff" container style="height: 1024px" class="shadow-2 rounded-borders "
+      <q-layout view="lhh LpR lff" container style="height: 100vh" class="shadow-2 rounded-borders "
         :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
         <q-header>
 
@@ -73,8 +73,11 @@ export default {
 .btn {
   color: white;
   /* background-color: white; */
-  width: 50px;
-  padding: 5px;
+  width: 60px;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
 
 }

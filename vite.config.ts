@@ -20,6 +20,10 @@ export default defineConfig({
     }),
     envCompatible(envVars)
   ],
+  define: {
+
+    'import.meta.env': JSON.stringify(process.env)
+  },
   build: {
     rollupOptions: {
       output: {

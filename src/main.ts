@@ -30,7 +30,9 @@ import 'quasar/src/css/index.sass'
 import App from './App.vue'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css';
-import VueCookies from 'vue-cookies'
+import { VueCookieNext } from 'vue-cookie-next'
+// import dotenv from 'dotenv';
+// dotenv.config();
 
 const myApp = createApp(App)
 
@@ -51,7 +53,10 @@ myApp.use(Quasar, {
   */
 },)
 myApp.use(router);
-myApp.use(VueCookies)
+myApp.use(VueCookieNext);
+VueCookieNext.config({ expire: '7d' })
+
+
 
 
 myApp.component('q-btn', QBtn);
@@ -71,6 +76,7 @@ myApp.component('q-list', QList);
 myApp.component('q-item-label', QItemLabel);
 myApp.component('q-item-section', QIntersection);
 myApp.component('q-separator', QSeparator);
+
 
 
 // Assumes you have a <div id="app"></div> in your index.html
