@@ -1,7 +1,7 @@
 # Need YAML to set --build-arg
-steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', '--tag=gcr.io/${PROJECT_ID}/traffic-hero-frontend-website', --build-arg VITE_API="$VITE_API"  --build-arg VITE_websiteToken="$VITE_websiteToken" --no-cache', '.']
+# steps:
+# - name: 'gcr.io/cloud-builders/docker'
+#   args: ['build', '-t', '--tag=gcr.io/${PROJECT_ID}/traffic-hero-frontend-website', --build-arg VITE_API="$VITE_API"  --build-arg VITE_websiteToken="$VITE_websiteToken" --no-cache', '.']
 
 # steps:
 # - name: 'gcr.io/cloud-builders/docker'
@@ -16,3 +16,16 @@ steps:
 #     - '--no-cache'
 #     - '.'
 
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: [
+    'build',
+    '-t', 
+    'gcr.io/${PROJECT_ID}/traffic-hero-frontend-website', 
+    '--build-arg', 
+    "VITE_API=$_VITE_API",  # 使用 $_VITE_API
+    '--build-arg', 
+    "VITE_websiteToken=$_VITE_websiteToken",  # 使用 $_VITE_websiteToken
+    '--no-cache', 
+    '.'
+  ]
