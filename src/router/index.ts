@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import home from '../shared_interface/home.vue';
-import login from '../shared_interface/login.vue'
+import login from '../shared_interface/login.vue';
+import register from '../shared_interface/register.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -10,7 +11,11 @@ const routes: Array<RouteRecordRaw> = [
     {
       path: '/login',
       name: 'login',
-      component: login }
+      component: login },
+      {
+        path: '/register',
+        name: 'register',
+        component: register }
   
 ];
 
