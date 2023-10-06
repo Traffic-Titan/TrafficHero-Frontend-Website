@@ -22,7 +22,8 @@ export default defineConfig({
   ],
   define: {
 
-    'import.meta.env': JSON.stringify(process.env)
+    'import.meta.env.VITE_API': JSON.stringify(process.env.VITE_API),
+    'import.meta.env.VITE_websiteToken': JSON.stringify(process.env.VITE_websiteToken),
   },
   build: {
     rollupOptions: {
