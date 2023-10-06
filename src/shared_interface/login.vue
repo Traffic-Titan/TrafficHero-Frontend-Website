@@ -31,7 +31,7 @@
 
                 <div class="button-contaner">
                   <QBtn class="button" @click="loginClick" label="登入" />
-                  <QBtn class="button" @click="test" label="註冊" />
+                  <QBtn class="button" RouterLink to="/register" label="註冊" />
                 </div>
                 </div>
             </QCard>
@@ -72,12 +72,14 @@ export default {
       try {
         res.value = await apipost(body, loginurl, "");
         console.log(res.value)
-      } catch (e) {
+      } catch (e:any) {
         console.log(e);
+        message.value = e.response.data.detail
       }
 
       if(res.value.status == 200){
       setCookie('user',res.value.data.token)
+      message.value = res.value.data.detail
       }
     };
 
