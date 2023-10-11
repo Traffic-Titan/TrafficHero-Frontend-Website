@@ -5,8 +5,8 @@ import envCompatible from 'vite-plugin-env-compatible';
 
 
 const envVars = {
-  VITE_API: process.env.VITE_API,
-  VITE_websiteToken: process.env.VITE_websiteToken
+  VITE_API: process.env._VITE_API,
+  VITE_websiteToken: process.env._VITE_websiteToken
 } as { [key: string]: string };
 
 export default defineConfig({
