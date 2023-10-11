@@ -1,7 +1,7 @@
 // FILE: main.js
 
 import { createApp } from 'vue'
-import { Quasar, QBtn,QToolbar,QLayout,QHeader,QFooter,QDrawer,QPage,QPageContainer,QScrollArea, QPageSticky, QPageScroller, QInput, QBtnDropdown, QList, QItemLabel, QIntersection, QSeparator  } from 'quasar'; 
+import { Quasar, QBtn,QToolbar,QLayout,QHeader,QFooter,QDrawer,QPage,QPageContainer,QScrollArea, QPageSticky, QPageScroller, QInput, QBtnDropdown, QList, QItemLabel, QIntersection, QSeparator, QDate, QItem, QIcon, QDialog, QCarousel, QCarouselSlide  } from 'quasar'; 
 import quasarLang from 'quasar/lang/zh-TW'
 
 
@@ -76,7 +76,14 @@ myApp.component('q-list', QList);
 myApp.component('q-item-label', QItemLabel);
 myApp.component('q-item-section', QIntersection);
 myApp.component('q-separator', QSeparator);
-
+myApp.component('q-date', QDate);
+myApp.component('q-separator', QSeparator);
+myApp.component('q-item', QItem);
+myApp.component('q-icon', QIcon);
+myApp.component('q-item-section', QIntersection);
+myApp.component('q-dialog', QDialog);
+myApp.component('q-carousel', QCarousel);
+myApp.component('q-carousel-slide', QCarouselSlide);
 
 
 // Assumes you have a <div id="app"></div> in your index.html

@@ -21,28 +21,33 @@ export default {
         icon: "message",
         label: "最新消息",
         separator: true,
+        path: "/admin/new"
       },
       {
         icon: "send",
         label: "帳戶資訊",
         separator: true,
+        path: "/admin/profile"
       },
     
       {
         icon: "error",
         label: "Spam",
         separator: true,
+        path: "/admin/new"
       },
       {
         icon: "settings",
         label: "設定",
         separator: false,
+        path: "/admin/new"
       },
       {
         icon: "help",
         iconColor: "primary",
         label: "幫助",
         separator: false,
+        path: "/admin/new"
       },
     ];
 
@@ -122,8 +127,9 @@ export default {
           <q-scroll-area class="fit">
             <q-list>
               <template v-for="(menuItem, index) in menuList" :key="index">
-                <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                  <q-item-section avatar class="q-icon" >
+              
+                <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple routerlink :to="menuItem.path">
+                  <q-item-section avatar class="q-icon">
                     <q-icon :name="menuItem.icon" class="q-icon" />
                   </q-item-section>
                   <q-item-section class="q-menu-text">
