@@ -8,8 +8,7 @@
               <div class="">
                 <div class="login-text-con">
                   <p class="login-text">登入</p>
-                </div>
-
+                </div> 
                 <div class="textinput-contaner">
                   <q-input
                     rounded
@@ -25,10 +24,8 @@
                     label="密碼"
                     type="password"
                   />
-
                   {{ message }}
                 </div>
-
                 <div class="button-contaner">
                   <QBtn class="button" @click="loginClick" label="登入" />
                   <QBtn class="button" RouterLink to="/register" label="註冊" />
@@ -44,24 +41,31 @@
 
 <script lang="ts">
 import { ref, onMounted } from "vue";
-import { RouterLink } from "vue-router";
-import { apipost } from "../function/api_function";
+import { RouterLink, useRouter, } from "vue-router";
+import { apipost } from "../shared_interface/function/api_function";
 import { useCookie } from 'vue-cookie-next'
 import { url_login } from "../url_manager";
-import { text } from "stream/consumers";
-import { Cookies } from "quasar";
+
+
+
 
 export default {
+  components:{
+    
+  },
   setup() {
     const email_text = ref("");
     const password_text = ref("");
     const res = ref();
     const loginurl = url_login;
     const message = ref('')
+    const router = useRouter();
     const {setCookie, removeCookie,getCookie} = useCookie()
     const onMounted = () => {
       
     };
+
+
 
     const loginClick = async () => {
 
@@ -71,20 +75,34 @@ export default {
       }
       try {
         res.value = await apipost(body, loginurl, "");
+       
         console.log(res.value)
       } catch (e:any) {
         console.log(e);
         message.value = e.response.data.detail
       }
-
       if(res.value.status == 200){
-      setCookie('user',res.value.data.token)
+      setCookie('user',res.value.data)
       message.value = res.value.data.detail
+      const user = getCookie("user").role;
+
+
+      if (user == "user") {
+        router.push({ path: '/' });
+      } else if (user == "admin") {
+        router.push({ path: '/admin' });
+        
+      }else{
+       
+      }
       }
     };
 
     const test = async () =>{
       console.log(  getCookie('user'))
+
+      const user = getCookie("user").role;
+    
     
     }
     return {
@@ -164,3 +182,4 @@ export default {
   border-radius: 30px;
 }
 </style>
+./function/api_function
