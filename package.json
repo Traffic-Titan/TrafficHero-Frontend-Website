@@ -8,7 +8,6 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
-    "start": "node server.js"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.7",
