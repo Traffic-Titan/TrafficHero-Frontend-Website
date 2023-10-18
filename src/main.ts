@@ -24,7 +24,7 @@ import '@quasar/extras/line-awesome/line-awesome.css'
 // import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
 // Import Quasar css
 import 'quasar/src/css/index.sass'
-import Vuex from './store'
+
 
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
@@ -98,7 +98,7 @@ myApp.component('q-tab-panels', QTabPanels);
 myApp.component('q-tab', QTab);
 myApp.component('q-tab-panel', QTabPanel);
 
-myApp.use(Vuex)
+
 
 // Assumes you have a <div id="app"></div> in your index.html
 myApp.mount('#app')
