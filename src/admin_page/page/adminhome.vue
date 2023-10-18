@@ -94,14 +94,16 @@ export default {
       console.log(api);
     };
     onMounted(async () => {
-
-  
         url.value = get_Profile
         console.log(url.value)
-        const res = await apiget(url.value,jwt) 
+        try{
+          const res = await apiget(url.value,jwt) 
         profile.value = res.data
         setCookie('profile',profile.value)
-
+        }catch(e){
+          console.log(e)
+        }
+       
       const user = getCookie("user").role;
       if (user == "user") {
         login_text.value = user;
@@ -161,7 +163,6 @@ export default {
                 
                   </q-item-section>
                   
-                 
                 </q-item>
                 <q-item clickable v-close-popup tabindex="0" @click="logout">
                  
@@ -214,7 +215,6 @@ export default {
 <style scoped>
 .test {
   top: 0%;
-
   padding: 0%;
 }
 
