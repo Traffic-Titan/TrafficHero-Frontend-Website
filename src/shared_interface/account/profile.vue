@@ -1,41 +1,46 @@
 <template>
   <div class="main">
-    <p>個人資料</p>
+
+  <p class="titleText">
+   基本資料
+    </p>
 
     <QCard class="Qcard">
-      <q-item clickable>
-        <q-item-section avatar class="q-icon">
-          {{ "09" }}
+   
+      <q-item clickable class="item" routerLink to="/admin/changeName">
+        <q-item-section class="title">
+          <p>姓名： </p> 
         </q-item-section>
-        <q-item-section class="q-menu-text">
-          {{ "test" }}
-        </q-item-section>
-      </q-item>
-
-      <q-item clickable>
-        <q-item-section avatar class="q-icon">
-          {{ "09" }}
-        </q-item-section>
-        <q-item-section class="q-menu-text">
-          {{ "test" }}
+        <q-space />
+        <q-item-section class="q-menu-text" >
+          {{ profile.name }}
         </q-item-section>
       </q-item>
 
-      <q-item clickable>
-        <q-item-section avatar class="q-icon">
-          {{ "09" }}
+      <q-item clickable class="item" routerLink to="/admin/changeEmail">
+        <q-item-section class="title" >
+          <p>電子郵件</p>
         </q-item-section>
-        <q-item-section class="q-menu-text">
-          {{ "test" }}
+        <q-item-section class="q-menu-text  title-sub" >
+          {{ profile.email }}
         </q-item-section>
       </q-item>
 
-      <q-item clickable>
-        <q-item-section avatar class="q-icon">
-          {{ "09" }}
+      <q-item clickable class="item" routerLink to="/admin/changeGender">
+        <q-item-section class="title" >
+          <p>性別：</p>
         </q-item-section>
-        <q-item-section class="q-menu-text">
-          {{ "test" }}
+        <q-item-section class="q-menu-text  title-sub" >
+          {{ profile.gender }}
+        </q-item-section>
+      </q-item>
+
+      <q-item clickable class="item" routerLink to="/admin/changeBirthday">
+        <q-item-section class="title" >
+        <p>生日：</p>
+        </q-item-section>
+        <q-item-section class="q-menu-text  title-sub" >
+          {{ profile.birthday }}
         </q-item-section>
       </q-item>
     </QCard>
@@ -51,18 +56,22 @@ import {get_Profile} from '../../url_manager'
 export default {
   setup() {
     const router = useRouter();
-    const {getCookie} = useCookie();
+    const {getCookie,setCookie} = useCookie();
     const url = ref('');
     const jwt: string = ','+getCookie('user').token
+    const profile = ref()
 
     onMounted(async() => {
         url.value = get_Profile
         console.log(url.value)
         console.log(jwt)
         const res = await apiget(url.value,jwt) 
-        console.log(res)
+        profile.value = res.data
+        setCookie('profile',profile.value)
     });
-    return {};
+    return {
+      profile
+    };
   },
 };
 </script>
@@ -73,11 +82,33 @@ export default {
   flex-direction: column;
   align-items: center;
   height: 100vh;
+  padding: 30px;
 }
 
 .Qcard {
-  width: 50%;
+  width: 80%;
   border-radius: 10px;
   padding: 10px;
+}
+
+.item{
+  display: flex;
+  flex-direction: row;
+}
+
+.title{
+  width: 20%;
+  display: flex;
+  align-items: center;
+}
+
+.title-sub{
+  width: 80%;
+  display: flex;
+  justify-content: end;
+}
+
+.titleText{
+  font-size:300%;
 }
 </style>

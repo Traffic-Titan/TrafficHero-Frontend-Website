@@ -6,84 +6,34 @@
           <div class="main">
             <QCard class="QCard">
               <P class="register-text">註冊</P>
+              <q-input outlined v-model="name_text" label="輸入姓名" />
+              <q-input outlined v-model="email_text" label="輸入電子郵件" ></q-input>
 
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">姓名</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="name"
-                  aria-label="name"
-                  aria-describedby="basic-addon1"
-                  v-model="name_text"
-                />
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">電子郵件</span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="E-mail"
-                  aria-label="E-mail"
-                  aria-describedby="basic-addon1"
-                  v-model="email_text"
-                />
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">密碼</span>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="password"
-                  aria-label="password"
-                  aria-describedby="basic-addon1"
-                  v-model="password_text"
-                />
-              </div>
-              <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">確認密碼</span>
-                <input
-                  type="password"
-                  class="form-control"
-                  placeholder="check password"
-                  aria-label="checkpassword"
-                  aria-describedby="basic-addon1"
-                  v-model="checkpassword_text"
-                />
-              </div>
-              <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">性別</label>
-                <select class="form-select" id="gender_text" v-model="gender_text">
-                  <option selected value="0">選擇</option>
-                  <option value="1">女</option>
-                  <option value="2">男</option>
-                  <option value="3">其他</option>
-                </select>
-              </div>
-              <div class="input-group mb-3">
-                <label class="input-group-text" for="inputGroupSelect01">生日</label>
-                <select class="form-select" id="year_text" v-model="birthday_year">
-                  <option selected value="0">選擇</option>
-                  <option v-for="year in 124" :key="year" :value="2023 - year">
-                    {{ 2023 - year }}
-                  </option>
-                </select>
-                <label class="input-group-text" for="inputGroupSelect01">年</label>
-                <select class="form-select" id="inputGroupSelect01" v-model="birthday_mounth">
-                  <option selected value="0">選擇</option>
-                  <option v-for="i in 12" :key="i" :value="i">{{ i }}</option>
-                </select>
-                <label class="input-group-text" for="inputGroupSelect01">月</label>
-                <select
-                  class="form-select"
-                  id="inputGroupSelect01"
-                  v-model="birthday_day"
-                >
-                  <option selected :value="0">選擇</option>
-                  <option v-for="i in 31" :key="i" :value="i">{{ i }}</option>
-                </select>
-                <label class="input-group-text" for="inputGroupSelect01">日</label>
-              </div>
+              <q-input outlined v-model="password_text"  :type="isPwd ? 'password' : 'text'" >
+        <template v-slot:append >
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+           
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
+
+      <q-input outlined v-model="password_text"  :type="isPwd ? 'password' : 'text'" >
+        <template v-slot:append >
+          <q-icon
+            :name="isPwd ? 'visibility_off' : 'visibility'"
+           
+            @click="isPwd = !isPwd"
+          />
+        </template>
+      </q-input>
+            
+           
+              
+            
+      <q-select outlined v-model="gender_text" :options="options" label="選擇性別" class="input"/>
+              <q-input v-model="date" outlined type="date" label="選擇生日" />
               <q-btn label="下一步" class="register-button" @click="registerClick" />
             </QCard>
           </div>
@@ -99,6 +49,7 @@ import { RouterLink, useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
 import { useCookie } from "vue-cookie-next";
 import { url_register } from "../url_manager";
+import { encryptPassword } from "./function/SHA256";
 
 export default {
   components: {},
@@ -108,7 +59,7 @@ export default {
     const email_text = ref("");
     const password_text = ref("");
     const checkpassword_text = ref("");
-    const gender_text = ref(0);
+    const gender_text = ref('選擇');
     const birthday_text = ref("");
     const birthday_year = ref(0);
     const birthday_mounth = ref(0);
@@ -116,16 +67,19 @@ export default {
     const res = ref();
     const loginurl = url_register;
     const message = ref("");
+    const date = ref()
     const { setCookie, removeCookie, getCookie } = useCookie();
+
     const onMounted = () => {};
 
     const registerClick = async () => {
       const body = {
         name: name_text.value,
         email: email_text.value,
-        password: password_text.value,
+        password: encryptPassword(password_text.value),
         gender: gender_text.value,
-        birthday: birthday_year.value + "/" + birthday_mounth.value + "/" + birthday_day.value,
+        birthday:
+          birthday_year.value + "/" + birthday_mounth.value + "/" + birthday_day.value,
         google_id: "string",
         google_avatar: "string",
       };
@@ -138,17 +92,19 @@ export default {
       }
 
       if (res.value.status == 200) {
-      console.log( res.value.data.detail)
-      router.push({ path: '/login' });
-       
+        console.log(res.value.data.detail);
+        router.push({ path: "/login" });
       }
     };
     const test = async () => {
       console.log(gender_text.value);
       console.log(
-        birthday_year.value + '/' +
-          birthday_mounth.value + '/' +
-          birthday_day.value + '/' +
+        birthday_year.value +
+          "/" +
+          birthday_mounth.value +
+          "/" +
+          birthday_day.value +
+          "/" +
           gender_text.value
       );
     };
@@ -165,6 +121,11 @@ export default {
       birthday_mounth,
       birthday_day,
       name_text,
+      isPwd: ref(true),
+      date,
+      options: [
+        '女', '男', '其他', 
+      ],
     };
   },
 };

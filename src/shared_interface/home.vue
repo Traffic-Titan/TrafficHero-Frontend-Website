@@ -1,5 +1,5 @@
 <script lang="ts">
-import { RouterLink, RouterView,useRouter } from "vue-router";
+import { RouterLink, RouterView, useRouter } from "vue-router";
 import { QBtn, QToolbar, QLayout, QHeader, QFooter, QDrawer, QPage } from "quasar";
 import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
@@ -18,26 +18,11 @@ export default {
     const router = useRouter();
     const menuList = [
       {
-        icon: "message",
-        label: "最新消息",
-        separator: true,
-      },
-      {
-        icon: "send",
-        label: "帳戶資訊",
-        separator: true,
-      },
-    
-      {
         icon: "error",
         label: "Spam",
         separator: true,
       },
-      {
-        icon: "settings",
-        label: "設定",
-        separator: false,
-      },
+
       {
         icon: "help",
         iconColor: "primary",
@@ -47,25 +32,17 @@ export default {
     ];
 
     const logout = async () => {
-      setCookie('user','')
-      router.push({ path: '/login' });
+      setCookie("user", "");
+      router.push({ path: "/login" });
     };
 
     const test = () => {
       console.log(api);
     };
     onMounted(async () => {
+
       const user = getCookie("user").role;
-      if (user == "user") {
-        login_text.value = user;
-        loginout_show.value = true;
-      } else if (user == "admin") {
-        login_text.value = user;
-        loginout_show.value = true;
-      }else{
-        loginout_show.value = false;
-        console.log(user)
-      }
+      setCookie('user','')
     });
     return {
       textd,
@@ -93,48 +70,15 @@ export default {
         <q-header>
           <q-toolbar class="text-white test row">
             <p class="btn2"></p>
-            <q-btn
-              stretch
-              flat
-              round
-              dense
-              icon="menu"
-              class="q-mr-sm btn"
-              @click="drawerLeft = !drawerLeft"
-            />
-            <q-btn stretch flat class="btn" RouterLink to="/login">{{
-              login_text
-            }}</q-btn>
-
-            <q-btn stretch flat label="Link" class="btn" />
-            <q-btn stretch flat label="登出" class="btn" v-if="loginout_show" @click="logout"/>
+            <q-toolbar-title>
+              Traffic Hero
+            </q-toolbar-title>
+            <q-space/>
+            <q-btn stretch flat class="btn" RouterLink to="/login">登入</q-btn>
           </q-toolbar>
         </q-header>
         <q-footer> </q-footer>
-        <q-drawer
-          v-model="drawerLeft"
-          show-if-above
-          :width="200"
-          :breakpoint="500"
-          bordered
-          :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'"
-        >
-          <q-scroll-area class="fit">
-            <q-list>
-              <template v-for="(menuItem, index) in menuList" :key="index">
-                <q-item clickable :active="menuItem.label === 'Outbox'" v-ripple>
-                  <q-item-section avatar class="q-icon" >
-                    <q-icon :name="menuItem.icon" class="q-icon" />
-                  </q-item-section>
-                  <q-item-section class="q-menu-text">
-                    {{ menuItem.label }}
-                  </q-item-section>
-                </q-item>
-                <q-separator :key="'sep' + index" v-if="menuItem.separator" />
-              </template>
-            </q-list>
-          </q-scroll-area>
-        </q-drawer>
+      
         <q-page-container>
           <q-page>
             <router-view></router-view>
