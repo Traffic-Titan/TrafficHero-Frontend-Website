@@ -56,7 +56,7 @@ export default {
         console.log(res.value);
       } catch (e: any) {
         console.log(e);
-        message.value = e.response.data.detail;
+        message.value = e.response.data.message;
       }
       if (res.value.status == 200) {
         setCookie("user", res.value.data);
