@@ -11,7 +11,7 @@ export default {
 
   setup() {
     const textd = ref("");
-    const api = import.meta.env.VITE_API;
+    const api = process.env.VITE_API;
     const { setCookie, removeCookie, getCookie } = useCookie();
     const login_text = ref("登入");
     const loginout_show = ref(false);
