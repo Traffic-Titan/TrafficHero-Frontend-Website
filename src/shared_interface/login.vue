@@ -56,11 +56,11 @@ export default {
         console.log(res.value);
       } catch (e: any) {
         console.log(e);
-        message.value = e.response.data.message;
+        message.value = e.response.data.detail;
       }
       if (res.value.status == 200) {
         setCookie("user", res.value.data);
-        message.value = res.value.data.detail;
+        message.value = res.value.data.message;
         const user = getCookie("user").role;
 
         if (user == "user") {

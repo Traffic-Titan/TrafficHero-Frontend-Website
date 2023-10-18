@@ -63,8 +63,6 @@ export default {
 
     onMounted(async() => {
         url.value = get_Profile
-        console.log(url.value)
-        console.log(jwt)
         const res = await apiget(url.value,jwt) 
         profile.value = res.data
         setCookie('profile',profile.value)
