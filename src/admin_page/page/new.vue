@@ -1,36 +1,37 @@
 <template>
   <div class="main">
-    <p>最新消息</p>
-    <div class="Q-card-con" v-for="(list, index) in newsList" :key="index">
-      <QCard class="Q-card">
-        <p>{{ list.label }}</p>
-       
-
-        <q-btn label="更新" class="button" @click="update(list.path, list.label)" />
-
-        <q-dialog v-model="show">
-          <q-carousel
-            swipeable
-            animated
-            v-model="slide"
-            control-color="primary"
-            padding
-            height="200px"
-            class="bg-white shadow-1 rounded-borders"
-          >
-            <q-carousel-slide
-              :name="1"
-              class="column no-wrap flex-center q-carousel-slide"
-            >
-              {{ dialog_text }}
-              <div class="q-mt-md text-center">
-                {{ mess }}
-              </div>
-            </q-carousel-slide>
-          </q-carousel>
-        </q-dialog>
-      </QCard>
+    <div class="q-linear-progress">
+      <q-linear-progress dark rounded indeterminate  size="25px"  color="blue" class="q-mt-sm" v-if="linnershow" />
     </div>
+    <p class="titleText">
+    最新消息
+    </p>
+    <QCard class="Q-card">
+      <q-item class="item" v-for="(list, index) in newsList" :key="index">
+        <q-item-section class="title">
+          <p>{{ list.label }}</p>
+       
+        </q-item-section>
+        <q-space />
+        <ul>
+          <p>{{ list.show }}</p>
+        </ul>
+       
+        <q-item-section class="q-menu-text  title-sub">
+          <q-btn push color="primary" label="更新" @click="update(list.path,index)" v-bind:disable="buttondisable" :loading="buttondisable">
+          </q-btn>
+        </q-item-section>
+      </q-item>
+    </QCard>
+    <q-dialog v-model="dialog" position="top">
+      <q-card style="width: 350px">
+        <q-card-section class="row items-center no-wrap">
+          <div>
+            <div class="text-weight-bold">{{ message }}</div>
+          </div>
+        </q-card-section>
+      </q-card>
+    </q-dialog>
   </div>
 </template>
 <script lang="ts">
@@ -50,88 +51,109 @@ import {
 import { apiput } from "../../shared_interface/function/api_function";
 import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
+import Vue from 'vue';
 
 export default {
   setup() {
     const { getCookie } = useCookie();
     const jwt = "," + getCookie("user").token;
     const body = {};
-    const message = ref("");
-    const show = ref(false);
+    const message = ref('')
     const mess = ref("1");
     const dialog_text = ref("");
-    const newsList = [
+    const dialog = ref(false)
+    const linnershow = ref(false)
+    const buttondisable = ref(false)
+    const newsList = ref([
       {
         label: "最新消息-臺鐵",
         path: news_TaiwanRailway,
-        show: mess.value,
+        show: '',
+        type: "rail"
       },
       {
         label: "最新消息-高鐵",
         path: news_TaiwanHighSpeedRail,
-        show: mess.value,
+        show: '',
+        type: "rail"
       },
 
       {
         label: "最新消息-捷運",
         path: news_MRT,
-        show: mess.value,
+        show:'',
+        type: "rail"
       },
       {
         label: "最新消息-公車",
         path: news_Bus,
-        show: mess.value,
+        show: '',
+        type: "road"
       },
       {
         label: "最新消息-公路客運",
         path: news_IntercityBus,
-        show: mess.value,
+        show:'',
+        type: "road"
       },
       {
         label: "最新消息-省道",
         path: news_TaiwanRailway,
-        show: mess.value,
+        show: '',
+        type: "way"
       },
       {
         label: "最新消息-地區道路",
         path: news_LocalRoad,
-        show: mess.value,
+        show: '',
+        type: "way"
       },
       {
         label: "最新消息-臺灣好行公車",
         path: news_TaiwanTouristShuttle,
-        show: mess.value,
+        show: '',
+        type: "road"
       },
       {
         label: "最新消息-阿里山林業鐵路",
         path: news_AlishanForestRailway,
-        show: mess.value,
+        show: '',
+        type: "rail"
       },
       {
         label: "最新消息-高速公路",
         path: news_Freeway,
-        show: mess.value,
+        show: '',
+        type: "way"
       },
       {
         label: "最新消息-公共自行車",
         path: news_PublicBicycle,
-        show: mess.value,
+        show: '',
+        type: "road"
       },
-    ];
+    ]);
 
-    const update = async (url: string, message: string) => {
+    const update = async (url: string, index: any) => {
+      linnershow.value = true
+      buttondisable.value = true
       try {
         const res = await apiput(body, url, jwt);
         if (res.status == 200) {
-          console.log(res.data);
-          mess.value = res.data;
-          console.log(mess.value);
-          dialog_text.value = message;
-          show.value = true;
+          linnershow.value = false
+          buttondisable.value = false
+          newsList.value[index].show = res.data.message;
+          dialog.value = true
+          console.log(newsList.value[index].show)
+          
+          message.value = res.data.message
+          newsList.value[index].show = res.data.message;
+          return newsList.value[index].show
         }
       } catch (e) {
         console.log(e);
       }
+      
     };
     return {
       update,
@@ -148,10 +170,12 @@ export default {
       news_PublicBicycle,
       message,
       newsList,
-      show,
       slide: ref(1),
       mess,
+      dialog,
       dialog_text,
+      linnershow,
+      buttondisable
     };
   },
 };
@@ -159,18 +183,16 @@ export default {
 <style scoped>
 .main {
   display: flex;
-  padding: 20px;
-  height: 100vh;
-  gap: 10px;
+  padding: 0px;
+  height: 200vh;
+  align-items: center;
   flex-direction: column;
 }
+
 .Q-card {
-  width: 200px;
-  height: 200px;
+  width: 80%;
   display: flex;
   padding: 10px;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
   border-radius: 20px;
 }
@@ -182,13 +204,27 @@ export default {
   height: 30px;
   border-radius: 20px;
 }
-.Q-card-con {
-  flex-direction: row;
 
-  gap: 10px;
+.Q-card-con {
+  display: flex;
+  flex-direction: row;
+  width: 200px;
+
 }
 
 .q-carousel-slide {
   width: 200px;
+  display: flex;
+  justify-content: start;
+  align-items: start;
+}
+.titleText{
+  font-size:300%;
+
+}
+
+.q-linear-progress{
+  padding: 0px;
+  height: 10px;
 }
 </style>

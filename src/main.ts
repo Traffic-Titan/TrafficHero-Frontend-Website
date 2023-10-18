@@ -1,7 +1,7 @@
 // FILE: main.js
 
 import { createApp } from 'vue'
-import { Quasar, QBtn,QToolbar,QLayout,QHeader,QFooter,QDrawer,QPage,QPageContainer,QScrollArea, QPageSticky, QPageScroller, QInput, QBtnDropdown, QList, QItemLabel, QIntersection, QSeparator, QDate, QItem, QIcon, QDialog, QCarousel, QCarouselSlide  } from 'quasar'; 
+import { Quasar, QBtn,QToolbar,QLayout,QHeader,QFooter,QDrawer,QPage,QPageContainer,QScrollArea, QPageSticky, QPageScroller, QInput, QBtnDropdown, QList, QItemLabel, QIntersection, QSeparator, QDate, QItem, QIcon, QDialog, QCarousel, QCarouselSlide, QSelect, QSpace, QToolbarTitle, QCard, QLinearProgress, QCardSection, QSpinner, QTab, QTabs, QTabPanels, QTabPanel  } from 'quasar'; 
 import quasarLang from 'quasar/lang/zh-TW'
 
 
@@ -21,15 +21,16 @@ import '@quasar/extras/ionicons-v4/ionicons-v4.css'
 import '@quasar/extras/eva-icons/eva-icons.css'
 import '@quasar/extras/themify/themify.css'
 import '@quasar/extras/line-awesome/line-awesome.css'
-import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
+// import '@quasar/extras/bootstrap-icons/bootstrap-icons.css'
 // Import Quasar css
 import 'quasar/src/css/index.sass'
+import Vuex from './store'
 
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
 import App from './App.vue'
 import router from './router'
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
 import { VueCookieNext } from 'vue-cookie-next'
 // import dotenv from 'dotenv';
 // dotenv.config();
@@ -84,7 +85,20 @@ myApp.component('q-item-section', QIntersection);
 myApp.component('q-dialog', QDialog);
 myApp.component('q-carousel', QCarousel);
 myApp.component('q-carousel-slide', QCarouselSlide);
+myApp.component('q-select', QSelect);
+myApp.component('q-space', QSpace);
+myApp.component('q-toolbar-title', QToolbarTitle);
+myApp.component('q-btn-dropdown', QBtnDropdown);
+myApp.component('q-card', QCard);
+myApp.component('q-linear-progress', QLinearProgress);
+myApp.component('q-card-section', QCardSection);
+myApp.component('q-spinner', QSpinner);
+myApp.component('q-tabs', QTabs);
+myApp.component('q-tab-panels', QTabPanels);
+myApp.component('q-tab', QTab);
+myApp.component('q-tab-panel', QTabPanel);
 
+myApp.use(Vuex)
 
 // Assumes you have a <div id="app"></div> in your index.html
 myApp.mount('#app')

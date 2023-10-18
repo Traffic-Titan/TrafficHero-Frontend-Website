@@ -5,32 +5,18 @@
         <q-page>
           <div class="main">
             <QCard class="QCard">
-              <div class="">
-                <div class="login-text-con">
-                  <p class="login-text">登入</p>
-                </div> 
-                <div class="textinput-contaner">
-                  <q-input
-                    rounded
-                    outlined
-                    v-model="email_text"
-                    label="電子郵件"
-                    type="email"
-                  />
-                  <q-input
-                    rounded
-                    outlined
-                    v-model="password_text"
-                    label="密碼"
-                    type="password"
-                  />
-                  {{ message }}
-                </div>
-                <div class="button-contaner">
-                  <QBtn class="button" @click="loginClick" label="登入" />
-                  <QBtn class="button" RouterLink to="/register" label="註冊" />
-                </div>
-                </div>
+              <div class="login-text-con">
+                <p class="login-text">登入</p>
+              </div>
+              <div class="textinput_container">
+                <q-input rounded outlined v-model="email_text" label="電子郵件"  type="email"/>
+                <q-input rounded outlined v-model="password_text" label="密碼" type="password"/>
+                {{ message }}
+              </div>
+              <div class="button-contaner">
+                <QBtn class="button" @click="loginClick" label="登入" />
+                <QBtn class="button" RouterLink to="/register" label="註冊" />
+              </div>
             </QCard>
           </div>
         </q-page>
@@ -41,76 +27,62 @@
 
 <script lang="ts">
 import { ref, onMounted } from "vue";
-import { RouterLink, useRouter, } from "vue-router";
+import { RouterLink, useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
-import { useCookie } from 'vue-cookie-next'
+import { useCookie } from "vue-cookie-next";
 import { url_login } from "../url_manager";
-
-
-
+import { encryptPassword } from "./function/SHA256";
 
 export default {
-  components:{
-    
-  },
+  components: {},
   setup() {
     const email_text = ref("");
     const password_text = ref("");
     const res = ref();
     const loginurl = url_login;
-    const message = ref('')
+    const message = ref("");
     const router = useRouter();
-    const {setCookie, removeCookie,getCookie} = useCookie()
-    const onMounted = () => {
-      
-    };
-
-
+    const { setCookie, removeCookie, getCookie } = useCookie();
+    const onMounted = () => { };
 
     const loginClick = async () => {
-
-      const body ={
-        email : email_text.value,
-        password : password_text.value
-      }
+      const body = {
+        email: email_text.value,
+        password: encryptPassword(password_text.value),
+      };
       try {
         res.value = await apipost(body, loginurl, "");
-       
-        console.log(res.value)
-      } catch (e:any) {
+
+        console.log(res.value);
+      } catch (e: any) {
         console.log(e);
-        message.value = e.response.data.detail
+        message.value = e.response.data.detail;
       }
-      if(res.value.status == 200){
-      setCookie('user',res.value.data)
-      message.value = res.value.data.detail
-      const user = getCookie("user").role;
+      if (res.value.status == 200) {
+        setCookie("user", res.value.data);
+        message.value = res.value.data.detail;
+        const user = getCookie("user").role;
 
-
-      if (user == "user") {
-        router.push({ path: '/' });
-      } else if (user == "admin") {
-        router.push({ path: '/admin' });
-        
-      }else{
-       
-      }
+        if (user == "user") {
+          router.push({ path: "/" });
+        } else if (user == "admin") {
+          router.push({ path: "/admin" });
+        } else {
+        }
       }
     };
 
-    const test = async () =>{
-      console.log(  getCookie('user'))
+    const test = async () => {
+      console.log(getCookie("user"));
 
       const user = getCookie("user").role;
-    
-    
-    }
+    };
     return {
       email_text,
       password_text,
       loginClick,
       message,
-      test
+      test,
     };
   },
 };
@@ -132,16 +104,15 @@ export default {
   padding: 20px;
 }
 
-.textinput-contaner {
-  display: grid;
-
+.textinput_container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 10px;
 }
 
-.textinput-contaner q-input {
-  text-align: center; /* 输入框居中对齐 */
-  margin: 0%;
-  padding: 0%;
+.textinput_container > .row {
+  --bs-gutter-x : 0;
 }
 
 .page {
@@ -173,12 +144,12 @@ export default {
 
 .QCard {
   width: 30%;
-  height: 50%;
+  min-height: 50%;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
+  flex-direction: column;
   border-radius: 30px;
 }
 </style>

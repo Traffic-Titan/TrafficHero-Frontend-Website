@@ -5,10 +5,18 @@ import register from '../shared_interface/register.vue'
 import adminhome from "../admin_page/page/adminhome.vue"
 import adminnew from "../admin_page/page/new.vue"
 import profile from '../shared_interface/account/profile.vue'
+import tourism from '../admin_page/page/tourism.vue'
+import changeBirthday from '../shared_interface/account/changeBirthday.vue'
+import changeEmail from '../shared_interface/account/changeEmail.vue'
+import changeGender from '../shared_interface/account/changeGender.vue'
+import changeName from '../shared_interface/account/changeName.vue'
+import weather from '../admin_page/page/weather.vue'
+import cms from '../admin_page/page/cms.vue'
 
 
 const routes: Array<RouteRecordRaw> = [
   {
+    
     path: '/',
     name: 'home',
     component: home
@@ -37,7 +45,35 @@ const routes: Array<RouteRecordRaw> = [
       },
       {
         path: 'profile',
-        component: profile
+        component: profile,
+      },
+      {
+        path: 'tourism',
+        component: tourism
+      },
+      {
+        path: 'weather',
+        component: weather
+      },
+      {
+        path: 'cms',
+        component: cms
+      },
+      {
+        path: 'changeBirthday',
+        component: changeBirthday
+      },
+      {
+        path: 'changeEmail',
+        component: changeEmail
+      },
+      {
+        path: 'changeGender',
+        component: changeGender
+      },
+      {
+        path: 'changeName',
+        component: changeName
       },
     ]
   },
@@ -48,6 +84,7 @@ const routes: Array<RouteRecordRaw> = [
     component: adminhome,
     children: [
       {
+
         path: 'profile',
         component: profile
       },
