@@ -12,8 +12,6 @@
         </q-item-section>
       </q-item>
     </div>
-     
-     
       <p class="title">修改電子郵件</p>
       <div class="form-floating mb-3 input" >
         <q-input rounded outlined v-model="text" label="輸入性名" class="input"/>
