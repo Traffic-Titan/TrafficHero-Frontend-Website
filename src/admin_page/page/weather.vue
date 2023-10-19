@@ -106,7 +106,7 @@
 </template>
 <script lang="ts">
 
-import { apidelete, apipost, apiput, apiget } from "../../shared_interface/function/api_function";
+import { apiput, apiget } from "../../shared_interface/function/api_function";
 import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
 
@@ -178,24 +178,10 @@ export default {
       }
     };
 
-    const del = async (url: string,) => {
-      try {
-        const res = await apidelete(url, jwt);
-        if (res.status == 200) {
-          console.log(res.data);
-          return res.data
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    const toggleItemStatus = (index: any) => {
-      options.value[index].icon_url_day = 'https://cdn-icons-png.flaticon.com/512/4011/4011075.png'
-    }
+  
 
     return {
       update,
-      toggleItemStatus,
       message,
       show,
       slide: ref(1),

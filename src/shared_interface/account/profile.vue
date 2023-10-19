@@ -49,13 +49,11 @@
 
 <script lang="ts">
 import { useCookie } from "vue-cookie-next";
-import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { apiget } from "../function/api_function";
 import {get_Profile} from '../../url_manager'
 export default {
   setup() {
-    const router = useRouter();
     const {getCookie,setCookie} = useCookie();
     const url = ref('');
     const jwt: string = ','+getCookie('user').token

@@ -49,9 +49,8 @@ import {
   news_PublicBicycle,
 } from "../../url_manager";
 import { apiput } from "../../shared_interface/function/api_function";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useCookie } from "vue-cookie-next";
-import Vue from 'vue';
 
 export default {
   setup() {

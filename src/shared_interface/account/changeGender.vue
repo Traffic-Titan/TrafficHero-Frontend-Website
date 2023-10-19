@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts">
-import type { text } from "stream/consumers";
 import { useCookie } from "vue-cookie-next";
 import { useRouter } from "vue-router";
 import { ref,onMounted } from 'vue'

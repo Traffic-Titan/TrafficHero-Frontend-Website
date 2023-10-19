@@ -44,8 +44,8 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
 import { useCookie } from "vue-cookie-next";
 import { url_register } from "../url_manager";
@@ -68,9 +68,8 @@ export default {
     const loginurl = url_register;
     const message = ref("");
     const date = ref()
-    const { setCookie, removeCookie, getCookie } = useCookie();
+    useCookie();
 
-    const onMounted = () => {};
 
     const registerClick = async () => {
       const body = {

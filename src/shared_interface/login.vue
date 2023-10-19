@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
 import { useCookie } from "vue-cookie-next";
 import { url_login } from "../url_manager";
@@ -42,8 +42,7 @@ export default {
     const loginurl = url_login;
     const message = ref("");
     const router = useRouter();
-    const { setCookie, removeCookie, getCookie } = useCookie();
-    const onMounted = () => { };
+    const { setCookie, getCookie } = useCookie();
 
     const loginClick = async () => {
       const body = {
@@ -75,7 +74,6 @@ export default {
     const test = async () => {
       console.log(getCookie("user"));
 
-      const user = getCookie("user").role;
     };
     return {
       email_text,
