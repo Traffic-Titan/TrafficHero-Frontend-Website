@@ -7,32 +7,18 @@
             <q-card class="q-card">
               <P class="register-text">註冊</P>
               <q-input outlined v-model="name_text" label="輸入姓名" />
-              <q-input outlined v-model="email_text" label="輸入電子郵件" ></q-input>
-
-              <q-input outlined v-model="password_text"  :type="isPwd ? 'password' : 'text'" >
-        <template v-slot:append >
-          <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
-           
-            @click="isPwd = !isPwd"
-          />
-        </template>
-      </q-input>
-
-      <q-input outlined v-model="password_text"  :type="isPwd ? 'password' : 'text'" >
-        <template v-slot:append >
-          <q-icon
-            :name="isPwd ? 'visibility_off' : 'visibility'"
-           
-            @click="isPwd = !isPwd"
-          />
-        </template>
-      </q-input>
-            
-           
-              
-            
-      <q-select outlined v-model="gender_text" :options="options" label="選擇性別" class="input"/>
+              <q-input outlined v-model="email_text" label="輸入電子郵件"></q-input>
+              <q-input outlined v-model="password_text" :type="isPwd ? 'password' : 'text'">
+                <template v-slot:append>
+                  <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" @click="isPwd = !isPwd" />
+                </template>
+              </q-input>
+              <q-input outlined v-model="password_text" :type="isPwd ? 'password' : 'text'">
+                <template v-slot:append>
+                  <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" @click="isPwd = !isPwd" />
+                </template>
+              </q-input>
+              <q-select outlined v-model="gender_text" :options="options" label="選擇性別" class="input" />
               <q-input v-model="date" outlined type="date" label="選擇生日" />
               <q-btn label="下一步" class="register-button" @click="registerClick" />
             </q-card>
@@ -67,9 +53,9 @@ export default {
     const loginurl = url_register;
     const message = ref("");
     const date = ref()
-   
 
-   
+
+
 
     const registerClick = async () => {
       const body = {
@@ -99,12 +85,12 @@ export default {
       console.log(gender_text.value);
       console.log(
         birthday_year.value +
-          "/" +
-          birthday_mounth.value +
-          "/" +
-          birthday_day.value +
-          "/" +
-          gender_text.value
+        "/" +
+        birthday_mounth.value +
+        "/" +
+        birthday_day.value +
+        "/" +
+        gender_text.value
       );
     };
     return {
@@ -123,7 +109,7 @@ export default {
       isPwd: ref(true),
       date,
       options: [
-        '女', '男', '其他', 
+        '女', '男', '其他',
       ],
     };
   },
@@ -181,9 +167,7 @@ export default {
 .q-card {
   width: 30%;
   height: 80%;
-
   display: flow-root;
-
   align-items: center;
   justify-content: center;
   border-radius: 30px;

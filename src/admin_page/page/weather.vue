@@ -29,10 +29,10 @@
             <q-item class="item" :key="index">
               <q-item-section class="title">
                 <p> 類型： {{ list.weather }}</p>
-                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" />
-                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" />
+                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" class="input"/>
+                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" class="input"/>
               </q-item-section>
-              <q-space />
+       
 
             </q-item>
             <q-space />
@@ -55,8 +55,8 @@
             <q-item class="item" :key="index">
               <q-item-section class="title">
                 <p> 類型： {{ list.type1 + list.type2 }}</p>
-                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" />
-                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" />
+                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" class="input"/>
+                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" class="input"/>
               </q-item-section>
               <q-space />
             </q-item>
@@ -80,8 +80,8 @@
             <q-item class="item" :key="index">
               <q-item-section class="title">
                 <p> 類型： {{ list.type1 + list.type2 }}</p>
-                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" />
-                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" />
+                <q-input filled v-model=list.icon_url_day label="白天 URL" :dense="dense" class="input"/>
+                <q-input filled v-model=list.icon_url_night label="夜晚 URL" :dense="dense" class="input"/>
               </q-item-section>
               <q-space />
             </q-item>
@@ -238,6 +238,7 @@ export default {
 .item {
   display: flex;
   flex-direction: row;
+  justify-content: start;
 }
 
 .title {
@@ -308,5 +309,8 @@ img {
   display: flex;
   justify-content: start;
   align-items: start;
+}
+.input{
+  width: 700px;
 }
 </style>

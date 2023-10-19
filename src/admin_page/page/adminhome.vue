@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
 import { get_Profile } from "../../url_manager";
 import { apiget } from "../../shared_interface/function/api_function";
-
+const drawerLeft = ref(false)
 export default {
   components: {
     toolbar,
@@ -19,17 +19,11 @@ export default {
     const login_text = ref("登入");
     const loginout_show = ref(false);
     const router = useRouter();
-    const drawerLeft = ref(false)
+
     const linnershow = ref(true)
     const url = ref('')
     const profile = ref()
     const menuList = [
-      {
-        icon: "send",
-        label: "帳戶資訊",
-        separator: true,
-        path: "/admin/profile",
-      },
       {
         icon: "message",
         label: "最新消息",
@@ -63,26 +57,6 @@ export default {
         separator: true,
         path: "/admin/cms",
       },
-
-      //   {
-      //     icon: "error",
-      //     label: "Spam",
-      //     separator: true,
-      //     path: "/admin/new",
-      //   },
-      //   {
-      //     icon: "settings",
-      //     label: "設定",
-      //     separator: false,
-      //     path: "/admin/new",
-      //   },
-      //   {
-      //     icon: "help",
-      //     iconColor: "primary",
-      //     label: "幫助",
-      //     separator: false,
-      //     path: "/admin/new",
-      //   },
     ];
 
     const logout = async () => {
@@ -94,6 +68,7 @@ export default {
       console.log(api);
     };
     onMounted(async () => {
+      drawerLeft.value = !drawerLeft
         url.value = get_Profile
         console.log(url.value)
         try{
@@ -147,40 +122,28 @@ export default {
             <q-btn stretch flat class="btn" RouterLink to="/login" disable>{{
               login_text
             }}</q-btn>
-
-
-
-
             <q-btn-dropdown stretch flat label="帳戶">
               <q-list>
-              
-                <q-item clickable v-close-popup tabindex="0">
+                <q-item clickable v-close-popup tabindex="0" routerLink to="/admin/profile">
                   <q-item-section avatar>
                     <q-avatar icon="folder" color="secondary" text-color="white" />
                   </q-item-section>
-                  <q-item-section>
+                  <q-item-section >
                     <q-item-label>帳戶資訊</q-item-label>
-                
                   </q-item-section>
-                  
                 </q-item>
                 <q-item clickable v-close-popup tabindex="0" @click="logout">
-                 
                   <q-item-section >
                     <q-item-label >登出</q-item-label>
-                
                   </q-item-section>
-                  
-                 
                 </q-item>
-               
               </q-list>
             </q-btn-dropdown>
          
           </q-toolbar>
         </q-header>
         <q-footer> </q-footer>
-        <q-drawer v-model="drawerLeft"   show-if-above
+        <q-drawer    show-if-above v-model="drawerLeft"
         :width="200"
         :breakpoint="500"
         bordered

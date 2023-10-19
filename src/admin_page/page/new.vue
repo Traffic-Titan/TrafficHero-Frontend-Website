@@ -13,14 +13,13 @@
        
         </q-item-section>
         <q-space />
-        <ul>
+        <q-item-section class="title2">
           <p>{{ list.show }}</p>
-        </ul>
+        </q-item-section>
        
-        <q-item-section class="q-menu-text  title-sub">
           <q-btn push color="primary" label="更新" @click="update(list.path,index)" v-bind:disable="buttondisable" :loading="buttondisable">
           </q-btn>
-        </q-item-section>
+      
       </q-item>
     </q-card>
     <q-dialog v-model="dialog" position="top">
@@ -183,8 +182,9 @@ export default {
 .main {
   display: flex;
   padding: 0px;
-  height: 200vh;
+  height: 100vh;
   align-items: center;
+  justify-content: start;
   flex-direction: column;
 }
 
@@ -225,5 +225,12 @@ export default {
 .q-linear-progress{
   padding: 0px;
   height: 10px;
+}
+
+.title2{
+  width: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

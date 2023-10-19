@@ -14,7 +14,7 @@
                 {{ message }}
               </div>
               <div class="button-contaner">
-                <q-btn class="button" @click="loginClick" label="登入" />
+                <q-btn class="button" @click="loginClick" label="登入" :loading="buttondisable"/>
                 <q-btn class="button" RouterLink to="/register" label="註冊" />
               </div>
             </q-card>
@@ -42,9 +42,11 @@ export default {
     const loginurl = url_login;
     const message = ref("");
     const router = useRouter();
+    const buttondisable = ref(false)
     const { setCookie, getCookie } = useCookie();
 
     const loginClick = async () => {
+      buttondisable.value = true
       const body = {
         email: email_text.value,
         password: encryptPassword(password_text.value),
@@ -55,13 +57,14 @@ export default {
         console.log(res.value);
       } catch (e: any) {
         console.log(e);
+        buttondisable.value = false
         message.value = e.response.data.detail;
       }
       if (res.value.status == 200) {
         setCookie("user", res.value.data);
         message.value = res.value.data.message;
         const user = getCookie("user").role;
-
+        buttondisable.value = false
         if (user == "user") {
           router.push({ path: "/" });
         } else if (user == "admin") {
@@ -81,6 +84,7 @@ export default {
       loginClick,
       message,
       test,
+      buttondisable
     };
   },
 };
