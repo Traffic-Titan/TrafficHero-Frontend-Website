@@ -4,7 +4,7 @@
       <q-page-container>
         <q-page>
           <div class="main">
-            <QCard class="QCard">
+            <q-card class="q-card">
               <P class="register-text">註冊</P>
               <q-input outlined v-model="name_text" label="輸入姓名" />
               <q-input outlined v-model="email_text" label="輸入電子郵件" ></q-input>
@@ -35,7 +35,7 @@
       <q-select outlined v-model="gender_text" :options="options" label="選擇性別" class="input"/>
               <q-input v-model="date" outlined type="date" label="選擇生日" />
               <q-btn label="下一步" class="register-button" @click="registerClick" />
-            </QCard>
+            </q-card>
           </div>
         </q-page>
       </q-page-container>
@@ -44,10 +44,9 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
-import { useCookie } from "vue-cookie-next";
 import { url_register } from "../url_manager";
 import { encryptPassword } from "./function/SHA256";
 
@@ -68,9 +67,9 @@ export default {
     const loginurl = url_register;
     const message = ref("");
     const date = ref()
-    const { setCookie, removeCookie, getCookie } = useCookie();
+   
 
-    const onMounted = () => {};
+   
 
     const registerClick = async () => {
       const body = {
@@ -179,7 +178,7 @@ export default {
   gap: 10px;
 }
 
-.QCard {
+.q-card {
   width: 30%;
   height: 80%;
 

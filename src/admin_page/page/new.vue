@@ -6,7 +6,7 @@
     <p class="titleText">
     最新消息
     </p>
-    <QCard class="Q-card">
+    <q-card class="Q-card">
       <q-item class="item" v-for="(list, index) in newsList" :key="index">
         <q-item-section class="title">
           <p>{{ list.label }}</p>
@@ -22,7 +22,7 @@
           </q-btn>
         </q-item-section>
       </q-item>
-    </QCard>
+    </q-card>
     <q-dialog v-model="dialog" position="top">
       <q-card style="width: 350px">
         <q-card-section class="row items-center no-wrap">
@@ -49,9 +49,8 @@ import {
   news_PublicBicycle,
 } from "../../url_manager";
 import { apiput } from "../../shared_interface/function/api_function";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useCookie } from "vue-cookie-next";
-import Vue from 'vue';
 
 export default {
   setup() {

@@ -1,6 +1,6 @@
 <script lang="ts">
-import { RouterLink, RouterView, useRouter } from "vue-router";
-import { QBtn, QToolbar, QLayout, QHeader, QFooter, QDrawer, QPage } from "quasar";
+import { RouterView, useRouter } from "vue-router";
+import { QBtn, QToolbar, QLayout, QHeader, QFooter, QPage } from "quasar";
 import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
 
@@ -11,8 +11,8 @@ export default {
 
   setup() {
     const textd = ref("");
-    const api = process.env.VITE_API;
-    const { setCookie, removeCookie, getCookie } = useCookie();
+    const api = import.meta.env.VITE_API;
+    const { setCookie } = useCookie();
     const login_text = ref("登入");
     const loginout_show = ref(false);
     const router = useRouter();
@@ -41,7 +41,6 @@ export default {
     };
     onMounted(async () => {
 
-      const user = getCookie("user").role;
       setCookie('user','')
     });
     return {
