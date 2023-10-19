@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <QCard class="Qcard">
+    <q-card class="q-card">
       <div class=" pp">
       <q-item class="item">
         <q-item-section class="title pp">
@@ -25,7 +25,7 @@
 
      </div>
    
-    </QCard>
+    </q-card>
 
     <q-dialog v-model="dialog" position="top">
       <q-card style="width: 350px">
@@ -40,7 +40,6 @@
 </template>
 
 <script lang="ts">
-import type { text } from "stream/consumers";
 import { useCookie } from "vue-cookie-next";
 import { useRouter } from "vue-router";
 import { ref,onMounted } from 'vue'
@@ -113,7 +112,7 @@ export default {
   background-color: rgb(230, 240, 255);
 }
 
-.Qcard {
+.q-card {
   width: 60%;
   height: 50%;
   display: flex;

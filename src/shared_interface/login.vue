@@ -4,7 +4,7 @@
       <q-page-container>
         <q-page>
           <div class="main">
-            <QCard class="QCard">
+            <q-card class="q-card">
               <div class="login-text-con">
                 <p class="login-text">登入</p>
               </div>
@@ -14,10 +14,10 @@
                 {{ message }}
               </div>
               <div class="button-contaner">
-                <QBtn class="button" @click="loginClick" label="登入" />
-                <QBtn class="button" RouterLink to="/register" label="註冊" />
+                <q-btn class="button" @click="loginClick" label="登入" />
+                <q-btn class="button" RouterLink to="/register" label="註冊" />
               </div>
-            </QCard>
+            </q-card>
           </div>
         </q-page>
       </q-page-container>
@@ -26,8 +26,8 @@
 </template>
 
 <script lang="ts">
-import { ref, onMounted } from "vue";
-import { RouterLink, useRouter } from "vue-router";
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 import { apipost } from "../shared_interface/function/api_function";
 import { useCookie } from "vue-cookie-next";
 import { url_login } from "../url_manager";
@@ -42,8 +42,7 @@ export default {
     const loginurl = url_login;
     const message = ref("");
     const router = useRouter();
-    const { setCookie, removeCookie, getCookie } = useCookie();
-    const onMounted = () => { };
+    const { setCookie, getCookie } = useCookie();
 
     const loginClick = async () => {
       const body = {
@@ -75,7 +74,6 @@ export default {
     const test = async () => {
       console.log(getCookie("user"));
 
-      const user = getCookie("user").role;
     };
     return {
       email_text,
@@ -142,7 +140,7 @@ export default {
   gap: 10px;
 }
 
-.QCard {
+.q-card {
   width: 30%;
   min-height: 50%;
 

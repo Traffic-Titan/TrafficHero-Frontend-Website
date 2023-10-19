@@ -8,7 +8,7 @@
     <p class="titleText">
       觀光資訊
     </p>
-    <QCard class="Qcard">
+    <q-card class="q-card">
       <q-item class="item">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點資料</p>
@@ -56,7 +56,7 @@
           <q-btn push color="primary" label="更新" @click=" TouristParking()" v-bind:disable="buttondisable" />
         </q-item-section>
       </q-item>
-    </QCard>
+    </q-card>
     <q-dialog v-model="dialog" position="top">
       <q-card style="width: 350px">
         <q-card-section class="row items-center no-wrap">
@@ -71,7 +71,7 @@
 <script lang="ts">
 
 import { apiput } from "../../shared_interface/function/api_function";
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { useCookie } from "vue-cookie-next";
 
 export default {
@@ -166,7 +166,7 @@ export default {
   flex-direction: column;
 }
 
-.Qcard {
+.q-card {
   width: 80%;
 
   border-radius: 20px;

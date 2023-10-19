@@ -17,7 +17,7 @@
     </div>
     <q-tab-panels v-model="tab" animated class="Qtabe" v-for="(list, index) in options" :key="index">
       <q-tab-panel name="mails" v-if="list.type1 == '晴'">
-        <QCard class="Qcard">
+        <q-card class="q-card">
           <div class="row">
             <div class="column">
               <img :src=list.icon_url_day class="img" onerror="this.src='https://icon2.cleanpng.com/20180605/ijl/kisspng-computer-icons-image-file-formats-no-image-5b16ff0d2414b5.0787389815282337411478.jpg'">
@@ -39,11 +39,11 @@
             <q-btn push color="primary" label="更新" @click=" update(list.id,list.icon_url_day,list.icon_url_night)" />
           </div>
 
-        </QCard>
+        </q-card>
       </q-tab-panel>
 
       <q-tab-panel name="alarms" v-if="list.type1 == '陰'">
-        <QCard class="Qcard">
+        <q-card class="q-card">
           <div class="row">
             <div class="column">
               <img :src=list.icon_url_day class="img" onerror="this.src='https://icon2.cleanpng.com/20180605/ijl/kisspng-computer-icons-image-file-formats-no-image-5b16ff0d2414b5.0787389815282337411478.jpg'">
@@ -64,11 +64,11 @@
             <q-btn push color="primary" label="更新" @click=" update(list.id,list.icon_url_day,list.icon_url_night)" />
           </div>
 
-        </QCard>
+        </q-card>
       </q-tab-panel>
 
       <q-tab-panel name="movies" v-if="list.type1 == '多雲'">
-        <QCard class="Qcard">
+        <q-card class="q-card">
           <div class="row">
             <div class="column">
               <img :src=list.icon_url_day class="img" onerror="this.src='https://icon2.cleanpng.com/20180605/ijl/kisspng-computer-icons-image-file-formats-no-image-5b16ff0d2414b5.0787389815282337411478.jpg'">
@@ -89,7 +89,7 @@
             <q-btn push color="primary" label="更新" @click=" update(list.id,list.icon_url_day,list.icon_url_night)" />
           </div>
 
-        </QCard>
+        </q-card>
       </q-tab-panel>
     </q-tab-panels>
     <q-dialog v-model="dialog" position="top">
@@ -106,7 +106,7 @@
 </template>
 <script lang="ts">
 
-import { apidelete, apipost, apiput, apiget } from "../../shared_interface/function/api_function";
+import { apiput, apiget } from "../../shared_interface/function/api_function";
 import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
 
@@ -178,17 +178,6 @@ export default {
       }
     };
 
-    const del = async (url: string,) => {
-      try {
-        const res = await apidelete(url, jwt);
-        if (res.status == 200) {
-          console.log(res.data);
-          return res.data
-        }
-      } catch (e) {
-        console.log(e);
-      }
-    };
     const toggleItemStatus = (index: any) => {
       options.value[index].icon_url_day = 'https://cdn-icons-png.flaticon.com/512/4011/4011075.png'
     }
@@ -236,7 +225,7 @@ export default {
 
 }
 
-.Qcard {
+.q-card {
   width: 100%;
   border-radius: 10px;
   padding: 10px;

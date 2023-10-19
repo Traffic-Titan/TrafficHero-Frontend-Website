@@ -5,7 +5,7 @@
    基本資料
     </p>
 
-    <QCard class="Qcard">
+    <q-card class="q-card">
    
       <q-item clickable class="item" routerLink to="/admin/changeName">
         <q-item-section class="title">
@@ -43,19 +43,17 @@
           {{ profile.birthday }}
         </q-item-section>
       </q-item>
-    </QCard>
+    </q-card>
   </div>
 </template>
 
 <script lang="ts">
 import { useCookie } from "vue-cookie-next";
-import { useRouter } from "vue-router";
 import { ref, onMounted } from "vue";
 import { apiget } from "../function/api_function";
 import {get_Profile} from '../../url_manager'
 export default {
   setup() {
-    const router = useRouter();
     const {getCookie,setCookie} = useCookie();
     const url = ref('');
     const jwt: string = ','+getCookie('user').token
@@ -83,7 +81,7 @@ export default {
   padding: 30px;
 }
 
-.Qcard {
+.q-card {
   width: 80%;
   border-radius: 10px;
   padding: 10px;
