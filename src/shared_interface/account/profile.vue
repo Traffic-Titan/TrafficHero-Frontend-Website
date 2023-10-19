@@ -4,7 +4,7 @@
   <p class="titleText">
    基本資料
     </p>
-
+  
     <q-card class="q-card">
    
       <q-item clickable class="item" routerLink to="/admin/changeName">
@@ -12,8 +12,8 @@
           <p>姓名： </p> 
         </q-item-section>
         <q-space />
-        <q-item-section class="q-menu-text" >
-          {{ profile.name }}
+        <q-item-section class="q-menu-text title-sub" >
+      {{ name }}
         </q-item-section>
       </q-item>
 
@@ -22,7 +22,7 @@
           <p>電子郵件</p>
         </q-item-section>
         <q-item-section class="q-menu-text  title-sub" >
-          {{ profile.email }}
+         {{ email  }}
         </q-item-section>
       </q-item>
 
@@ -31,7 +31,7 @@
           <p>性別：</p>
         </q-item-section>
         <q-item-section class="q-menu-text  title-sub" >
-          {{ profile.gender }}
+        {{ gender }}
         </q-item-section>
       </q-item>
 
@@ -40,7 +40,7 @@
         <p>生日：</p>
         </q-item-section>
         <q-item-section class="q-menu-text  title-sub" >
-          {{ profile.birthday }}
+        {{ birthday }}
         </q-item-section>
       </q-item>
     </q-card>
@@ -58,15 +58,32 @@ export default {
     const url = ref('');
     const jwt: string = ','+getCookie('user').token
     const profile = ref()
-
+    const name = ref('')
+    const email = ref('')
+    const gender = ref('')
+    const birthday = ref('')
     onMounted(async() => {
         url.value = get_Profile
+        try{
         const res = await apiget(url.value,jwt) 
         profile.value = res.data
+        console.log(profile.value)
+        name.value = profile.value.name
+        email.value = profile.value.email
+        gender.value = profile.value.gender
+        birthday.value = profile.value.birthday
         setCookie('profile',profile.value)
+        }catch(e){
+          console.log(e)
+        }
+       
     });
     return {
-      profile
+      profile,
+      name,
+      email,
+      gender,
+      birthday
     };
   },
 };
@@ -85,6 +102,7 @@ export default {
   width: 80%;
   border-radius: 10px;
   padding: 10px;
+  
 }
 
 .item{
@@ -95,13 +113,15 @@ export default {
 .title{
   width: 20%;
   display: flex;
-  align-items: center;
+  align-items: start;
 }
 
 .title-sub{
   width: 80%;
   display: flex;
-  justify-content: end;
+  align-items: end;
+  justify-content: center;
+  height: 10px;
 }
 
 .titleText{

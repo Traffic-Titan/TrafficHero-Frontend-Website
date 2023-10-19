@@ -9,52 +9,52 @@
       觀光資訊
     </p>
     <q-card class="q-card">
-      <q-item class="item">
+      <q-item class="item ">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點資料</p>
         </q-item-section>
-        <q-item-section class="q-menu-text  title-sub">
+     
           {{ tourismspot_text }}
-          <q-btn push color="primary" label="更新" @click=" TouristSpot()" v-bind:disable="buttondisable">
+          <q-btn push color="primary" label="更新" @click=" TouristSpot()" v-bind:disable="buttondisable" :loading="buttondisable">
           </q-btn>
-        </q-item-section>
+     
       </q-item>
       <q-item class="item">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點飯店</p>
         </q-item-section>
-        <q-item-section class="q-menu-text  title-sub">
+      
           {{ TouristHotel_text }}
-          <q-btn push color="primary" label="更新" @click=" TouristHotel()" v-bind:disable="buttondisable" />
-        </q-item-section>
+          <q-btn push color="primary" label="更新" @click=" TouristHotel()" v-bind:disable="buttondisable" :loading="buttondisable" />
+     
       </q-item>
       <q-item class="item">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點活動</p>
         </q-item-section>
-        <q-item-section class="q-menu-text  title-sub">
+      
 {{ TouristActivity_text }}
-          <q-btn push color="primary" label="更新" @click=" TouristActivity()" v-bind:disable="buttondisable" />
-        </q-item-section>
+          <q-btn push color="primary" label="更新" @click=" TouristActivity()" v-bind:disable="buttondisable" :loading="buttondisable" />
+      
       </q-item>
       <q-item class="item">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點餐飲</p>
         </q-item-section>
-        <q-item-section class="q-menu-text  title-sub">
+       
           {{ TouristFood_text }}
-          <q-btn push color="primary" label="更新" @click=" TouristFood()" v-bind:disable="buttondisable" />
-        </q-item-section>
+          <q-btn push color="primary" label="更新" @click=" TouristFood()" v-bind:disable="buttondisable" :loading="buttondisable"/>
+       
       </q-item>
       <q-item class="item">
         <q-item-section class="title">
           <p>觀光景點 - 全台觀光景點停車資料</p>
         </q-item-section>
-        <q-item-section class="q-menu-text  title-sub">
+      
 
           {{ TouristParking_text }}
-          <q-btn push color="primary" label="更新" @click=" TouristParking()" v-bind:disable="buttondisable" />
-        </q-item-section>
+          <q-btn push color="primary" label="更新" @click=" TouristParking()" v-bind:disable="buttondisable" :loading="buttondisable"/>
+       
       </q-item>
     </q-card>
     <q-dialog v-model="dialog" position="top">
@@ -163,6 +163,7 @@ export default {
   padding: 0px;
   height: 100vh;
   align-items: center;
+  justify-content: start;
   flex-direction: column;
 }
 
@@ -176,12 +177,14 @@ export default {
 .item {
   display: flex;
   flex-direction: row;
+  display: flex;
 }
 
 .title {
   width: 50%;
   display: flex;
   align-items: center;
+  justify-content: start;
   flex-direction: row;
 }
 
