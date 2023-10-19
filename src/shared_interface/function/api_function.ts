@@ -29,7 +29,7 @@ export const apiput = async (body:any,url:string,jwt:string) => {
 }
 
 export const apiget = async (url:string,jwt:string) => {
-  console.log(webtoken+jwt)
+
   const Response = await axios.get(api + url, {
       headers: {
         'Content-Type': 'application/json',
