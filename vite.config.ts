@@ -2,6 +2,7 @@ import { loadEnv, defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { quasar, transformAssetUrls } from '@quasar/vite-plugin'
 
+
 export default defineConfig(({ mode }) => {
   const url = loadEnv(mode, process.cwd()).VITE_PROXY_API;
   return {
@@ -14,7 +15,7 @@ export default defineConfig(({ mode }) => {
       })
     ],
     server: {
-      host: '0.0.0.0' ,
+  
       proxy: {
         '/api/': {
           target: url,

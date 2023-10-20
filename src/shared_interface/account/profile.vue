@@ -67,7 +67,6 @@ export default {
         try{
         const res = await apiget(url.value,jwt) 
         profile.value = res.data
-        console.log(profile.value)
         name.value = profile.value.name
         email.value = profile.value.email
         gender.value = profile.value.gender
