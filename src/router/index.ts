@@ -75,6 +75,10 @@ const routes: Array<RouteRecordRaw> = [
         path: 'changeName',
         component: changeName
       },
+      {
+        path: 'PublicTransport',
+        component:  () => import('../admin_page/page/publictransport.vue')
+      },
     ]
   },
 

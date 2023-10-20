@@ -5,7 +5,7 @@ import { ref, onMounted } from "vue";
 import { useCookie } from "vue-cookie-next";
 import { get_Profile } from "../../url_manager";
 import { apiget } from "../../shared_interface/function/api_function";
-const drawerLeft = ref(false)
+
 export default {
   components: {
     toolbar,
@@ -13,13 +13,12 @@ export default {
 
   setup() {
     const textd = ref("");
-    const api = import.meta.env.VITE_API;
     const { setCookie, getCookie } = useCookie();
-    const jwt = ','+getCookie('user').token
+    const jwt = ',' + getCookie('user').token
     const login_text = ref("登入");
     const loginout_show = ref(false);
     const router = useRouter();
-
+    const drawerLeft = ref(false)
     const linnershow = ref(true)
     const url = ref('')
     const profile = ref()
@@ -41,7 +40,7 @@ export default {
         icon: "send",
         label: "大眾運輸資訊",
         separator: true,
-        path: "/admin/profile",
+        path: "/admin/PublicTransport",
       },
 
       {
@@ -61,39 +60,38 @@ export default {
 
     const logout = async () => {
       setCookie("user", "");
-      router.push({ path: "/login" });
+      router.push({ path: "/" });
     };
 
-    const test = () => {
-      console.log(api);
-    };
+
     onMounted(async () => {
-      drawerLeft.value = !drawerLeft
-        url.value = get_Profile
-        console.log(url.value)
-        try{
-          const res = await apiget(url.value,jwt) 
+      drawerLeft.value = false
+      url.value = get_Profile
+      console.log(url.value)
+      try {
+        const res = await apiget(url.value, jwt)
         profile.value = res.data
-        setCookie('profile',profile.value)
-        }catch(e){
-          console.log(e)
-        }
-       
+        setCookie('profile', profile.value)
+      } catch (e) {
+        console.log(e)
+      }
+
       const user = getCookie("user").role;
       if (user == "user") {
         login_text.value = user;
         loginout_show.value = true;
+       await logout()
       } else if (user == "admin") {
         login_text.value = user;
-        loginout_show.value = true;
+        loginout_show.value = true; 
       } else {
         loginout_show.value = false;
         console.log(user);
+        await logout()
       }
     });
     return {
       textd,
-      test,
       drawerLeft,
       login_text,
       menuList,
@@ -111,7 +109,7 @@ export default {
       <q-layout view="lhh LpR lff" container style="height: 100vh" class="shadow-2 rounded-borders"
         :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
         <q-header>
-         
+
           <q-toolbar class="text-white test row">
             <p class="btn2"></p>
             <q-btn stretch flat round dense icon="menu" class="q-mr-sm btn" @click="drawerLeft = !drawerLeft" />
@@ -128,26 +126,23 @@ export default {
                   <q-item-section avatar>
                     <q-avatar icon="folder" color="secondary" text-color="white" />
                   </q-item-section>
-                  <q-item-section >
+                  <q-item-section>
                     <q-item-label>帳戶資訊</q-item-label>
                   </q-item-section>
                 </q-item>
                 <q-item clickable v-close-popup tabindex="0" @click="logout">
-                  <q-item-section >
-                    <q-item-label >登出</q-item-label>
+                  <q-item-section>
+                    <q-item-label>登出</q-item-label>
                   </q-item-section>
                 </q-item>
               </q-list>
             </q-btn-dropdown>
-         
+
           </q-toolbar>
         </q-header>
         <q-footer> </q-footer>
-        <q-drawer    show-if-above v-model="drawerLeft"
-        :width="200"
-        :breakpoint="500"
-        bordered
-        :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+        <q-drawer  v-model="drawerLeft" :width="200" :breakpoint="500" bordered
+          :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
           <q-scroll-area class="fit">
 
             <q-list>

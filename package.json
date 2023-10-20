@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@open-xchange/vite-plugin-proxy": "^0.7.6",
     "@quasar/extras": "^1.16.7",
     "axios": "^1.5.1",
     "dotenv": "^16.3.1",
